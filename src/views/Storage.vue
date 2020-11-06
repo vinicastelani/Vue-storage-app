@@ -57,7 +57,7 @@ export default {
       });
     },
     getStorage() {
-      axios.get("http://localhost:5000/storage").then((res) => {
+      axios.get("https://vue-storage-api.vercel.app/storage").then((res) => {
         this.itemsOnStorage = res.data.item;
       });
     },

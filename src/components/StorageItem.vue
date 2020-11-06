@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     async deleteItem(id) {
-      await Axios.delete(`http://localhost:5000/storage/${id}`);
+      await Axios.delete(`https://vue-storage-api.vercel.app/storage/${id}`);
       this.$emit("itemdeleted", true);
     },
   },

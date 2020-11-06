@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     async submit() {
-      await axios.post("http://localhost:5000/storage", this.item);
+      await axios.post("https://vue-storage-api.vercel.app/storage", this.item);
       this.$emit("itemadded", true);
     },
   },

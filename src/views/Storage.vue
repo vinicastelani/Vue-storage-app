@@ -57,7 +57,7 @@ export default {
       });
     },
     getStorage() {
-      axios.get("https://vue-storage-api.vercel.app/storage").then((res) => {
+      axios.get("https://vue-storage-api.vercel.app/storage/").then((res) => {
         this.itemsOnStorage = res.data.item;
       });
     },

@@ -42,13 +42,12 @@ export default {
       this.loading = true;
       console.log(JSON.parse(JSON.stringify(this.user)));
       try {
-        await Axios.post(
-          `${this.$store.state.api}/user/login/`,
-          this.user
-        ).then((response) => {
-          window.localStorage.setItem("token", response.data.token);
-          this.$store.commit("updateMessage", response.data.msg);
-        });
+        await Axios.post(`${this.$store.state.api}/user/login`, this.user).then(
+          (response) => {
+            window.localStorage.setItem("token", response.data.token);
+            this.$store.commit("updateMessage", response.data.msg);
+          }
+        );
       } catch (e) {
         this.$store.commit("updateMessage", e.response.data.msg);
       }

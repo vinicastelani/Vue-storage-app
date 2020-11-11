@@ -23,13 +23,13 @@
 <script>
 import Axios from "axios";
 export default {
-  name: "Item",
+  name: "item",
   data() {
     return {};
   },
   methods: {
     async deleteItem(id) {
-      await Axios.delete(`https://vue-storage-api.vercel.app/storage/${id}`);
+      await Axios.delete(`${this.$store.state.api}/storage/${id}`);
       this.$emit("itemdeleted", true);
     },
   },

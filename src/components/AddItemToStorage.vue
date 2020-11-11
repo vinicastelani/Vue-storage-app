@@ -47,7 +47,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Add item to storage",
+  name: "add-item",
   data() {
     return {
       item: {
@@ -60,10 +60,7 @@ export default {
   },
   methods: {
     async submit() {
-      await axios.post(
-        "https://vue-storage-api.vercel.app/storage/",
-        this.item
-      );
+      await axios.post(`${this.$store.state.api}/storage/`, this.item);
       this.$emit("itemadded", true);
     },
   },

@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "Navigation",
+  name: "navigation",
 };
 </script>
 

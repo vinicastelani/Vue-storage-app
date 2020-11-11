@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "Report",
+  name: "report",
   props: ["data"],
   computed: {
     totalItems() {

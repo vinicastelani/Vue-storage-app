@@ -1,19 +1,23 @@
 <template>
   <v-app>
     <Navbar />
-    <Storage />
+    <transition
+      name="router-anim"
+      enter-active-class="animated fadeIn"
+      leave-active-class
+    >
+      <router-view />
+    </transition>
   </v-app>
 </template>
 
 <script>
 import Navbar from "./components/Navbar";
-import Storage from "./views/Storage";
+
 export default {
   name: "App",
-
   components: {
     Navbar,
-    Storage,
   },
 
   data: () => ({
@@ -21,4 +25,9 @@ export default {
   }),
 };
 </script>
+<style >
+/* TRANSITION EFFECT */
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+/* TRANSITION EFFECT */
+</style>
 

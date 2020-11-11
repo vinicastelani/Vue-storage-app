@@ -3,6 +3,18 @@
   <v-container>
     <v-row>
       <v-col col="auto" :xl="3" :lg="3" :md="4" :sm="12" :cols="12">
+        <v-card>
+          <v-card-actions class="d-flex justify-end">
+            <v-btn text class="pa-2" @click="logout()">
+              Log out
+              <v-icon color="blue" medium>exit_to_app</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col col="auto" :xl="3" :lg="3" :md="4" :sm="12" :cols="12">
         <Addtostorage v-on:itemadded="getStorage()" />
         <StorageReport :data="itemsOnStorage" />
       </v-col>
@@ -36,7 +48,7 @@ import Addtostorage from "../components/AddItemToStorage";
 import StorageItem from "../components/StorageItem";
 import StorageReport from "../components/StorageReport";
 export default {
-  name: "Storage",
+  name: "storage",
   components: {
     Addtostorage,
     StorageItem,
@@ -57,9 +69,13 @@ export default {
       });
     },
     getStorage() {
-      axios.get("https://vue-storage-api.vercel.app/storage/").then((res) => {
+      axios.get(`${this.$store.state.api}/storage/`).then((res) => {
         this.itemsOnStorage = res.data.item;
       });
+    },
+    logout() {
+      window.localStorage.removeItem("token");
+      location.href = "/";
     },
   },
   //   computed: {

@@ -40,7 +40,6 @@ export default {
   methods: {
     async submit() {
       this.loading = true;
-      console.log(JSON.parse(JSON.stringify(this.user)));
       try {
         await Axios.post(`${this.$store.state.api}/user/login`, this.user).then(
           (response) => {

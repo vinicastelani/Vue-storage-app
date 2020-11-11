@@ -5,8 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "commit": "cz"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -28,14 +27,7 @@
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-vuetify": "~2.0.7",
     "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.3.0",
-    "cz-conventional-changelog": "^3.3.0",
-    "husky": "^4.3.0"
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-    }
+    "vuetify-loader": "^1.3.0"
   },
   "eslintConfig": {
     "root": true,
@@ -50,11 +42,6 @@
       "parser": "babel-eslint"
     },
     "rules": {}
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   },
   "browserslist": [
     "> 1%",

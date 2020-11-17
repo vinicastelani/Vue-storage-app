@@ -30,8 +30,8 @@ export default {
   data() {
     return {
       user: {
-        email: "visacastelani@gmail.com",
-        password: "vini110297",
+        email: "",
+        password: "",
       },
       formSwitch: true,
       loading: false,
@@ -56,7 +56,6 @@ export default {
         this.$store.commit("updateMessage", e.response.data.msg);
       }
       this.loading = false;
-      // location.href = "/storage";
     },
   },
 };

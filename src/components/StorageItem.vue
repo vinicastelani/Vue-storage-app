@@ -44,7 +44,6 @@ export default {
       this.loading = true;
       await Axios.delete(`${this.$store.state.api}/storage/${id}`);
       this.$emit("itemdeleted", true);
-      this.loading = false;
     },
   },
   props: ["data"],

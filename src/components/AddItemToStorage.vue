@@ -70,9 +70,6 @@ export default {
       this.loading = false;
     },
   },
-  created() {
-    console.log(this.$store.state.session.user.name);
-  },
 };
 </script>
 

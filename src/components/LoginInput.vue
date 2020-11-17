@@ -30,8 +30,8 @@ export default {
   data() {
     return {
       user: {
-        email: "",
-        password: "",
+        email: "visacastelani@gmail.com",
+        password: "vini110297",
       },
       formSwitch: true,
       loading: false,
@@ -42,16 +42,21 @@ export default {
       this.loading = true;
       try {
         await Axios.post(`${this.$store.state.api}/user/login`, this.user).then(
-          (response) => {
+          async (response) => {
             window.localStorage.setItem("token", response.data.token);
+            window.localStorage.setItem(
+              "Username",
+              JSON.stringify(response.data.log)
+            );
             this.$store.commit("updateMessage", response.data.msg);
+            location.href = "/storage";
           }
         );
       } catch (e) {
         this.$store.commit("updateMessage", e.response.data.msg);
       }
       this.loading = false;
-      location.href = "/storage";
+      // location.href = "/storage";
     },
   },
 };

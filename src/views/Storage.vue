@@ -24,7 +24,7 @@
             col="auto"
             :xl="4"
             :lg="4"
-            :md="4"
+            :md="6"
             :sm="6"
             :cols="12"
             v-for="(item, index) in itemsOnStorage"
@@ -78,11 +78,6 @@ export default {
       location.href = "/";
     },
   },
-  //   computed: {
-  //     storage() {
-  //       return axios.get("http://localhost:5000/storage");
-  //     },
-  //   },
   mounted() {
     this.getStorage();
   },

@@ -8,10 +8,7 @@ export default new Vuex.Store({
   state: {
     api: "https://vue-storage-api.vercel.app",
     session: {
-      user: {
-        _id: window.localStorage.getItem("UserID") || null,
-        name: null,
-      },
+      user: JSON.parse(window.localStorage.getItem("Username")),
       token: window.localStorage.getItem("token") || null,
     },
     message: {
@@ -34,8 +31,8 @@ export default new Vuex.Store({
         state.message = {};
       }, 3000);
     },
-    updateName(state, value) {
-      state.session.user.name = value;
+    updateUser(state, user) {
+      state.session.user = user;
     },
   },
 });

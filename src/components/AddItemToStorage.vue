@@ -39,7 +39,9 @@
     <v-card-actions class="pb-5">
       <v-btn color="primary" outlined> Cancel </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="primary" @click="submit()"> Submit </v-btn>
+      <v-btn color="primary" :loading="loading" @click="submit()">
+        Submit
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -55,14 +57,21 @@ export default {
         description: "",
         value: "",
         amount: "",
+        createdBy: this.$store.state.session.user._id,
       },
+      loading: false,
     };
   },
   methods: {
     async submit() {
+      this.loading = true;
       await axios.post(`${this.$store.state.api}/storage/`, this.item);
       this.$emit("itemadded", true);
+      this.loading = false;
     },
+  },
+  created() {
+    console.log(this.$store.state.session.user.name);
   },
 };
 </script>

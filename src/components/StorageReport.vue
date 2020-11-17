@@ -24,7 +24,7 @@ export default {
     totalValue() {
       let total = 0;
       this.data.map((item) => {
-        total += item.value;
+        total += item.value * item.amount;
       });
       return total;
     },

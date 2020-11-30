@@ -149,9 +149,13 @@ export default {
       });
     },
     getCatalog() {
-      axios.get(`${this.$store.state.api}/catalog/`).then((response) => {
-        this.itemsOnCatalog = response.data.catalog;
-      });
+      axios
+        .get(`${this.$store.state.api}/catalog/`, {
+          crossDomain: true,
+        })
+        .then((response) => {
+          this.itemsOnCatalog = response.data.catalog;
+        });
     },
     logout() {
       window.localStorage.removeItem("token");

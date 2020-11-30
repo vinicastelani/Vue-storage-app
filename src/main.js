@@ -14,7 +14,12 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
-    next();
+    if (store.getters.loggedIn) {
+      alert("Voce já está logado. Redirecionando..");
+      next({ path: "/storage" });
+    } else {
+      next();
+    }
   }
 });
 

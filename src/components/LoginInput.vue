@@ -49,7 +49,7 @@ export default {
               JSON.stringify(response.data.log)
             );
             this.$store.commit("updateMessage", response.data.msg);
-            location.href = "/storage";
+            // location.href = "/storage";
           }
         );
       } catch (e) {

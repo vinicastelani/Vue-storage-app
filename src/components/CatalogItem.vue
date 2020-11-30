@@ -19,12 +19,11 @@
       {{ data.description }}
     </v-card-subtitle>
     <v-card-text class="d-flex justify-space-between">
-      <div><b>Total:</b> {{ formatter.format(data.value) }}</div>
-      <div><b>x</b>{{ data.amount }}</div>
+      <div>{{ formatter.format(data.value) }}</div>
     </v-card-text>
     <v-card-text class="">
-      <b>Added by:</b> {{ data.createdBy.name }} <br />
-      <b>Added at:</b>
+      <b>Created by:</b> {{ data.createdBy.name }} <br />
+      <b>Created at:</b>
       {{ new Date(data.createdAt).toLocaleDateString("en-GB") }}
     </v-card-text>
   </v-card>
@@ -33,7 +32,7 @@
 <script>
 import Axios from "axios";
 export default {
-  name: "item",
+  name: "catalog-item",
   data() {
     return {
       loading: false,
@@ -46,7 +45,7 @@ export default {
   methods: {
     async deleteItem(id) {
       this.loading = true;
-      await Axios.delete(`${this.$store.state.api}/storage/${id}`);
+      await Axios.delete(`${this.$store.state.api}/catalog/${id}`);
       this.$emit("itemdeleted", true);
     },
   },

@@ -42,14 +42,14 @@ export default {
       this.loading = true;
       try {
         await Axios.post(`${this.$store.state.api}/user/login`, this.user).then(
-          async (response) => {
+          (response) => {
             window.localStorage.setItem("token", response.data.token);
             window.localStorage.setItem(
               "Username",
               JSON.stringify(response.data.log)
             );
             this.$store.commit("updateMessage", response.data.msg);
-            // location.href = "/storage";
+            location.href = "/storage";
           }
         );
       } catch (e) {

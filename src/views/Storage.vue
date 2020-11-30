@@ -144,13 +144,13 @@ export default {
       });
     },
     getStorage() {
-      axios.get(`${this.$store.state.api}/storage/`).then((res) => {
-        this.itemsOnStorage = res.data.item;
+      axios.get(`${this.$store.state.api}/storage/`).then((response) => {
+        this.itemsOnStorage = response.data.item;
       });
     },
     getCatalog() {
-      axios.get(`${this.$store.state.api}/catalog/`).then((res) => {
-        this.itemsOnCatalog = res.data.catalog;
+      axios.get(`${this.$store.state.api}/catalog/`).then((response) => {
+        this.itemsOnCatalog = response.data.catalog;
       });
     },
     logout() {

@@ -151,7 +151,7 @@ export default {
     getCatalog() {
       axios
         .get(`${this.$store.state.api}/catalog/`, {
-          crossDomain: true,
+          "access-control-allow-origin": "*",
         })
         .then((response) => {
           this.itemsOnCatalog = response.data.catalog;

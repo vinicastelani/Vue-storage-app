@@ -4,6 +4,7 @@
     <v-card-subtitle>Vue app</v-card-subtitle>
     <v-card-text>
       Items on storage: {{ totalItems }} <br />
+      <!-- Storage value: {{ formatter.format(totalValue) }} -->
       Storage value: {{ formatter.format(totalValue) }}
     </v-card-text>
   </v-card>
@@ -32,7 +33,7 @@ export default {
     totalValue() {
       let total = 0;
       this.data.map((item) => {
-        total += item.value;
+        total += parseInt(item.value);
       });
       return total;
     },

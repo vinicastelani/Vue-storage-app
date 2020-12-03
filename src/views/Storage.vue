@@ -63,6 +63,7 @@
             <CatalogItem
               :data="itemsOnCatalog[index]"
               v-on:itemdeleted="getCatalog()"
+              v-on:itemupdated="getCatalog(), getStorage()"
             />
           </v-col>
           <v-col
@@ -149,13 +150,9 @@ export default {
       });
     },
     getCatalog() {
-      axios
-        .get(`${this.$store.state.api}/catalog/`, {
-          "access-control-allow-origin": "*",
-        })
-        .then((response) => {
-          this.itemsOnCatalog = response.data.catalog;
-        });
+      axios.get(`${this.$store.state.api}/catalog/`).then((response) => {
+        this.itemsOnCatalog = response.data.catalog;
+      });
     },
     logout() {
       window.localStorage.removeItem("token");

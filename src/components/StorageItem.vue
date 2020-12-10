@@ -19,7 +19,7 @@
       {{ data.description }}
     </v-card-subtitle>
     <v-card-text class="d-flex justify-space-between">
-      <div><b>Total:</b> {{ formatter.format(data.value) }}</div>
+      <div><b>Total:</b> {{ formatter.format(data.value * data.amount) }}</div>
       <div><b>x</b>{{ data.amount }}</div>
     </v-card-text>
     <v-card-text class="">

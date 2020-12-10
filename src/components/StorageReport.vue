@@ -33,7 +33,7 @@ export default {
     totalValue() {
       let total = 0;
       this.data.map((item) => {
-        total += parseInt(item.value);
+        total += parseInt(item.value * item.amount);
       });
       return total;
     },

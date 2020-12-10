@@ -57,7 +57,7 @@ export default {
         _id: this.item._id || null,
         description: this.item.description || null,
         category: this.item.category || null,
-        value: this.item.value * this.item.amount || null,
+        value: this.item.value || null,
         amount: this.item.amount || null,
         createdBy: this.item.createdBy._id,
         addedBy: this.$store.state.session.user._id,

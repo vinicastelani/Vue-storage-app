@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import CatalogService from "../services/CatalogService";
 export default {
   name: "add-item-to-catalog",
   data() {
@@ -94,17 +94,22 @@ export default {
   methods: {
     async submit() {
       this.loading = true;
-      try {
-        await axios
-          .post(`${this.$store.state.api}/catalog/`, this.item)
-          .then((response) => {
-            this.$store.commit("updateMessage", response.data.msg);
-          });
-        this.$emit("itemaddedoncatalog", true);
-      } catch (e) {
-        this.$store.commit("updateMessage", e.response.data.msg);
-      }
-      this.loading = false;
+
+      CatalogService.addItem(this.item)
+        .then((response) => {
+          this.loading = false;
+          this.$emit("itemaddedoncatalog", true);
+          this.$store.commit("updateMessage", response.msg);
+
+          this.item.name = null;
+          this.item.description = null;
+          this.item.value = null;
+          this.item.category = null;
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$store.commit("updateMessage", e.response.data.msg);
+        });
     },
   },
 };

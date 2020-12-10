@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import Axios from "axios";
+import CatalogService from "../services/CatalogService";
 export default {
   name: "catalog-item",
   data() {
@@ -86,10 +86,10 @@ export default {
       updLoading: false,
       updateItemForm: false,
       itemToUpdate: {
-        _id: this.data._id,
         name: this.data.name,
-        description: this.data.description,
+        _id: this.data._id,
         value: this.data.value,
+        description: this.data.description,
       },
       formatter: new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -101,27 +101,33 @@ export default {
     handleClick() {
       this.updateItemForm = !this.updateItemForm;
     },
-    async deleteItem(id) {
+    deleteItem(id) {
       this.loading = true;
-      await Axios.delete(`${this.$store.state.api}/catalog/${id}`);
-      this.$emit("itemdeleted", true);
-    },
-    async updateItem() {
-      this.updLoading = true;
-      try {
-        await Axios.put(
-          `${this.$store.state.api}/catalog/${this.itemToUpdate._id}`,
-          this.itemToUpdate
-        ).then((response) => {
-          this.$store.commit("updateMessage", response.data.msg);
-          this.$emit("itemupdated", true);
+      CatalogService.deleteItem(id)
+        .then((response) => {
+          this.$store.commit("updateMessage", response.msg);
+          this.$emit("itemdeleted", true);
+          this.loading = false;
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$store.commit("updateMessage", e.response.data.msg);
         });
-      } catch (e) {
-        this.$store.commit("updateMessage", e.response.data.msg);
-      }
-      // this.$store.commit("updateMessage", e.response.data.msg);
-      this.updLoading = false;
-      this.updateItemForm = false;
+    },
+    updateItem() {
+      this.updLoading = true;
+      CatalogService.updateItem(this.itemToUpdate._id, this.itemToUpdate)
+        .then((response) => {
+          this.$store.commit("updateMessage", response.msg);
+          this.$emit("itemupdated", true);
+          this.updLoading = false;
+          this.updateItemForm = false;
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$store.commit("updateMessage", e.response.data.msg);
+          this.updLoading = false;
+        });
     },
   },
   props: ["data"],

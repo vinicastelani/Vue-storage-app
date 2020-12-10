@@ -26,7 +26,7 @@
       </v-text-field>
     </v-card-text>
     <v-card-actions class="pb-5">
-      <v-btn color="primary" :loading="loading" @click="submit()">
+      <v-btn color="primary" :loading="loading" @click="createItem()">
         Submit
       </v-btn>
     </v-card-actions>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import StorageService from "../services/StorageService";
 export default {
   name: "add-item-to-storage",
   props: ["data"],
@@ -49,29 +49,30 @@ export default {
     };
   },
   methods: {
-    async submit() {
+    createItem() {
       this.loading = true;
+
       let postItem = {
         name: this.item.name || null,
-        id: this.item.id || null,
+        _id: this.item._id || null,
         description: this.item.description || null,
         category: this.item.category || null,
         value: this.item.value * this.item.amount || null,
         amount: this.item.amount || null,
-        createdBy: this.$store.state.session.user._id,
+        createdBy: this.item.createdBy._id,
+        addedBy: this.$store.state.session.user._id,
       };
-      console.log(postItem);
-      try {
-        await axios
-          .post(`${this.$store.state.api}/storage/`, postItem)
-          .then((response) => {
-            this.$store.commit("updateMessage", response.data.msg);
-          });
-        this.$emit("itemadded", true);
-      } catch (e) {
-        this.$store.commit("updateMessage", e.response.data.msg);
-      }
-      this.loading = false;
+
+      StorageService.addItem(postItem)
+        .then((response) => {
+          this.loading = false;
+          this.$store.commit("updateMessage", response.msg);
+          this.$emit("itemadded", true);
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$store.commit("updateMessage", e.response.data.msg);
+        });
     },
   },
 };

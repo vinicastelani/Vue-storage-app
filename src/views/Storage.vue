@@ -96,6 +96,7 @@ import Addtocatalog from "../components/AddItemToCatalog";
 import CatalogItem from "../components/CatalogItem";
 import StorageItem from "../components/StorageItem";
 import StorageReport from "../components/StorageReport";
+import CatalogService from "../services/CatalogService";
 export default {
   name: "storage",
   components: {
@@ -150,8 +151,8 @@ export default {
       });
     },
     getCatalog() {
-      axios.get(`${this.$store.state.api}/catalog/`).then((response) => {
-        this.itemsOnCatalog = response.data.catalog;
+      CatalogService.getCatalog().then((response) => {
+        this.itemsOnCatalog = response;
       });
     },
     logout() {

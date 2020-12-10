@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="2">
+  <v-card elevation="2" min-height="100%">
     <v-card-title class="d-flex justify-space-between align-center">
       <span>
         {{ data.name }}
@@ -23,7 +23,7 @@
       <div><b>x</b>{{ data.amount }}</div>
     </v-card-text>
     <v-card-text class="">
-      <b>Added by:</b> {{ data.createdBy.name }} <br />
+      <b>Added by:</b> {{ data.addedBy.name }} <br />
       <b>Added at:</b>
       {{ new Date(data.createdAt).toLocaleDateString("en-GB") }}
     </v-card-text>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Axios from "axios";
+import StorageService from "../services/StorageService";
 export default {
   name: "item",
   data() {
@@ -44,10 +44,19 @@ export default {
     };
   },
   methods: {
-    async deleteItem(id) {
+    deleteItem(id) {
       this.loading = true;
-      await Axios.delete(`${this.$store.state.api}/storage/${id}`);
-      this.$emit("itemdeleted", true);
+
+      StorageService.deleteItem(id)
+        .then((response) => {
+          this.$store.commit("updateMessage", response.msg);
+          this.$emit("itemdeleted", true);
+          this.loading = false;
+        })
+        .catch((e) => {
+          this.loading = false;
+          this.$store.commit("updateMessage", e.response.data.msg);
+        });
     },
   },
   props: ["data"],
